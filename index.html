@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>千图成像 - Photomosaic Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>千图成像工具</h1>
+            <p>上传目标图片和背景图片库，生成艺术马赛克效果图</p>
+        </header>
+        <!-- 简单使用说明 -->
+        <section style="background:#f8f9fa;border-radius:8px;padding:16px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <h2 style="font-size:1.2rem;color:#333;margin-bottom:10px;">使用说明</h2>
+            <ol style="color:#555;font-size:1rem;line-height:1.8;padding-left:20px;">
+                <li>上传多张背景图片或ZIP包到“背景图片库”区。</li>
+                <li>上传一张目标图片到“目标图片”区。</li>
+                <li>可调整分割精度、输出质量、是否允许背景图复用。</li>
+                <li>点击“开始生成”按钮，等待进度完成。</li>
+                <li>生成结果将在下方预览，可下载PNG/JPG。</li>
+            </ol>
+        </section>
+
+        <main>
+            <!-- 上传区域 -->
+            <section class="upload-section">
+                <div class="upload-container">
+                    <!-- 背景图片库上传 -->
+                    <div class="upload-area" id="bg-upload-area">
+                        <h3>背景图片库</h3>
+                        <div class="drop-zone" id="bg-drop-zone">
+                            <div class="drop-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                                </svg>
+                                <p>拖拽多张图片或ZIP文件到此处</p>
+                                <button type="button" class="upload-btn" id="bg-upload-btn">选择文件</button>
+                                <input type="file" id="bg-file-input" multiple accept="image/*,.zip" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="upload-info">
+                            <span id="bg-count">已上传: 0 张图片</span>
+                            <button type="button" class="clear-btn" id="clear-bg-btn">清空图库</button>
+                        </div>
+                    </div>
+
+                    <!-- 目标图片上传 -->
+                    <div class="upload-area" id="target-upload-area">
+                        <h3>目标图片</h3>
+                        <div class="drop-zone" id="target-drop-zone">
+                            <div class="drop-content" id="target-drop-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24">
+                                    <path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
+                                </svg>
+                                <p>拖拽目标图片到此处</p>
+                                <button type="button" class="upload-btn" id="target-upload-btn">选择图片</button>
+                                <input type="file" id="target-file-input" accept="image/*" style="display: none;">
+                            </div>
+                            <div class="target-preview" id="target-preview" style="display: none;">
+                                <img id="target-img" alt="目标图片预览">
+                                <button type="button" class="remove-btn" id="remove-target-btn">移除</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 参数配置区 -->
+            <section class="config-section">
+                <h3>参数配置</h3>
+                <div class="config-container">
+                    <div class="config-item">
+                        <label for="grid-size">分割精度 (网格数量):</label>
+                        <div class="slider-container">
+                            <input type="range" id="grid-size" min="20" max="200" value="50" step="1">
+                            <span id="grid-value">50</span>
+                        </div>
+                        <small>数值越大，细节越丰富，但生成时间越长</small>
+                    </div>
+                    <div class="config-item">
+                        <label for="output-quality">输出质量:</label>
+                        <select id="output-quality">
+                            <option value="standard">标准质量 (适合预览)</option>
+                            <option value="high" selected>高质量 (适合打印)</option>
+                            <option value="ultra">超高质量 (适合大幅面)</option>
+                        </select>
+                        <small>质量越高，生成的图片分辨率越大，文件也越大</small>
+                    </div>
+                    <div class="config-item">
+                        <label>
+                            <input type="checkbox" id="allow-reuse" checked>
+                            允许重复使用背景图
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 操作按钮 -->
+            <section class="action-section">
+                <button type="button" class="primary-btn" id="generate-btn" disabled>开始生成</button>
+                <button type="button" class="secondary-btn" id="reset-btn">重置</button>
+            </section>
+
+            <!-- 进度指示器 -->
+            <section class="progress-section" id="progress-section" style="display: none;">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">准备中...</div>
+                </div>
+            </section>
+
+            <!-- 结果展示区 -->
+            <section class="result-section" id="result-section" style="display: none;">
+                <h3>生成结果</h3>
+                <div class="result-container">
+                    <div class="canvas-container">
+                        <canvas id="result-canvas"></canvas>
+                    </div>
+                    <div class="result-controls">
+                        <button type="button" class="download-btn" id="download-png-btn">下载 PNG</button>
+                        <button type="button" class="download-btn" id="download-jpg-btn">下载 JPG</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="photomosaic.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
