@@ -5,6 +5,9 @@ Disallow: /private/
 Disallow: /*.js$
 Disallow: /*.css$
 
+# Sitemap location
+Sitemap: https://photomosaic.jacbex.com/sitemap.xml
+
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
