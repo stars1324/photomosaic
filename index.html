@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>千图成像 - Photomosaic Tool</title>
+    <meta charset="UTF-8"    <div class="container">
+        <header>
+            <h1>千图成像工具 - 专业马赛克拼图生成器</h1>
+            <p>上传目标图片和背景图片库，生成艺术马赛克效果图。免费在线使用，支持高质量输出</p>
+        </header>
+        
+        <!-- 简单使用说明 -->
+        <section class="instructions" style="background:#f8f9fa;border-radius:8px;padding:16px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <h2 style="font-size:1.2rem;color:#333;margin-bottom:10px;">如何使用千图成像工具</h2>
+            <ol style="color:#555;font-size:1rem;line-height:1.8;padding-left:20px;">
+                <li>上传多张背景图片或ZIP包到"背景图片库"区域，建议使用高质量图片以获得更好的马赛克效果。</li>
+                <li>上传一张目标图片到"目标图片"区域，这将是您要转换成马赛克的主图。</li>
+                <li>调整分割精度、输出质量参数，精度越高细节越丰富，质量越高分辨率越大。</li>
+                <li>点击"开始生成"按钮，等待AI算法完成图像处理和马赛克拼接。</li>
+                <li>生成完成后可在下方预览效果，支持下载PNG和JPG格式的高清图片。</li>
+            </ol>
+        </section>="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO优化 - TDK -->
+    <title>千图成像工具 - 在线马赛克拼图生成器 | 免费照片马赛克制作</title>
+    <meta name="description" content="专业的千图成像在线工具，支持上传多张背景图片生成艺术马赛克效果图。免费使用，无需安装，支持高质量输出，适合个人创作和商业设计。">
+    <meta name="keywords" content="千图成像,马赛克拼图,照片马赛克,图片拼接,在线设计工具,艺术效果,免费工具,图像处理">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="千图成像工具 - 在线马赛克拼图生成器">
+    <meta property="og:description" content="专业的千图成像在线工具，支持上传多张背景图片生成艺术马赛克效果图。免费使用，无需安装。">
+    <meta property="og:image" content="/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:site_name" content="千图成像工具">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="千图成像工具 - 在线马赛克拼图生成器">
+    <meta name="twitter:description" content="专业的千图成像在线工具，支持上传多张背景图片生成艺术马赛克效果图。">
+    <meta name="twitter:image" content="/twitter-image.jpg">
+    
+    <!-- 其他SEO meta标签 -->
+    <meta name="author" content="千图成像工具">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <meta name="revisit-after" content="7 days">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- 结构化数据 - JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "千图成像工具",
+        "description": "专业的千图成像在线工具，支持上传多张背景图片生成艺术马赛克效果图",
+        "url": "https://yourdomain.com",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "featureList": [
+            "在线马赛克拼图生成",
+            "支持多种图片格式",
+            "高质量输出",
+            "免费使用",
+            "无需注册"
+        ]
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">跳转到主要内容</a>
     <div class="container">
         <header>
             <h1>千图成像工具</h1>
@@ -24,110 +99,132 @@
             </ol>
         </section>
 
-        <main>
+        <main role="main" id="main-content">
             <!-- 上传区域 -->
-            <section class="upload-section">
+            <section class="upload-section" aria-labelledby="upload-heading">
+                <h2 id="upload-heading" class="sr-only">图片上传区域</h2>
                 <div class="upload-container">
                     <!-- 背景图片库上传 -->
-                    <div class="upload-area" id="bg-upload-area">
-                        <h3>背景图片库</h3>
-                        <div class="drop-zone" id="bg-drop-zone">
+                    <article class="upload-area" id="bg-upload-area">
+                        <h3>背景图片库上传</h3>
+                        <div class="drop-zone" id="bg-drop-zone" role="button" tabindex="0" aria-label="拖拽或点击上传背景图片">
                             <div class="drop-content">
-                                <svg class="upload-icon" viewBox="0 0 24 24">
+                                <svg class="upload-icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
                                 </svg>
-                                <p>拖拽多张图片或ZIP文件到此处</p>
-                                <button type="button" class="upload-btn" id="bg-upload-btn">选择文件</button>
-                                <input type="file" id="bg-file-input" multiple accept="image/*,.zip" style="display: none;">
+                                <p>拖拽多张图片或ZIP文件到此处，支持JPG、PNG、WebP等格式</p>
+                                <button type="button" class="upload-btn" id="bg-upload-btn" aria-describedby="bg-upload-help">选择文件</button>
+                                <input type="file" id="bg-file-input" multiple accept="image/*,.zip" style="display: none;" aria-label="选择背景图片文件">
                             </div>
                         </div>
                         <div class="upload-info">
-                            <span id="bg-count">已上传: 0 张图片</span>
-                            <button type="button" class="clear-btn" id="clear-bg-btn">清空图库</button>
+                            <span id="bg-count" aria-live="polite">已上传: 0 张图片</span>
+                            <button type="button" class="clear-btn" id="clear-bg-btn" aria-label="清空所有背景图片">清空图库</button>
                         </div>
-                    </div>
+                        <small id="bg-upload-help">建议上传50-200张不同的高质量图片以获得最佳马赛克效果</small>
+                    </article>
 
                     <!-- 目标图片上传 -->
-                    <div class="upload-area" id="target-upload-area">
-                        <h3>目标图片</h3>
-                        <div class="drop-zone" id="target-drop-zone">
+                    <article class="upload-area" id="target-upload-area">
+                        <h3>目标图片上传</h3>
+                        <div class="drop-zone" id="target-drop-zone" role="button" tabindex="0" aria-label="拖拽或点击上传目标图片">
                             <div class="drop-content" id="target-drop-content">
-                                <svg class="upload-icon" viewBox="0 0 24 24">
+                                <svg class="upload-icon" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
                                 </svg>
-                                <p>拖拽目标图片到此处</p>
-                                <button type="button" class="upload-btn" id="target-upload-btn">选择图片</button>
-                                <input type="file" id="target-file-input" accept="image/*" style="display: none;">
+                                <p>拖拽目标图片到此处，将被转换为马赛克艺术作品</p>
+                                <button type="button" class="upload-btn" id="target-upload-btn" aria-describedby="target-upload-help">选择图片</button>
+                                <input type="file" id="target-file-input" accept="image/*" style="display: none;" aria-label="选择目标图片文件">
                             </div>
                             <div class="target-preview" id="target-preview" style="display: none;">
-                                <img id="target-img" alt="目标图片预览">
-                                <button type="button" class="remove-btn" id="remove-target-btn">移除</button>
+                                <img id="target-img" alt="目标图片预览" loading="lazy">
+                                <button type="button" class="remove-btn" id="remove-target-btn" aria-label="移除目标图片">移除</button>
                             </div>
                         </div>
-                    </div>
+                        <small id="target-upload-help">支持JPG、PNG、WebP格式，建议使用高分辨率图片</small>
+                    </article>
                 </div>
             </section>
 
             <!-- 参数配置区 -->
-            <section class="config-section">
-                <h3>参数配置</h3>
+            <section class="config-section" aria-labelledby="config-heading">
+                <h3 id="config-heading">马赛克生成参数配置</h3>
                 <div class="config-container">
                     <div class="config-item">
                         <label for="grid-size">分割精度 (网格数量):</label>
                         <div class="slider-container">
-                            <input type="range" id="grid-size" min="20" max="200" value="50" step="1">
-                            <span id="grid-value">50</span>
+                            <input type="range" id="grid-size" min="20" max="200" value="50" step="1" aria-describedby="grid-size-help">
+                            <span id="grid-value" aria-live="polite">50</span>
                         </div>
-                        <small>数值越大，细节越丰富，但生成时间越长</small>
+                        <small id="grid-size-help">数值越大，马赛克细节越丰富，但生成时间越长。推荐值：50-100</small>
                     </div>
                     <div class="config-item">
                         <label for="output-quality">输出质量:</label>
-                        <select id="output-quality">
-                            <option value="standard">标准质量 (适合预览)</option>
-                            <option value="high" selected>高质量 (适合打印)</option>
-                            <option value="ultra">超高质量 (适合大幅面)</option>
+                        <select id="output-quality" aria-describedby="quality-help">
+                            <option value="standard">标准质量 (适合网页预览和社交分享)</option>
+                            <option value="high" selected>高质量 (适合打印和专业用途)</option>
+                            <option value="ultra">超高质量 (适合大幅面打印)</option>
                         </select>
-                        <small>质量越高，生成的图片分辨率越大，文件也越大</small>
+                        <small id="quality-help">质量越高，生成的马赛克图片分辨率越大，文件也越大</small>
                     </div>
                     <div class="config-item">
-                        <label>
-                            <input type="checkbox" id="allow-reuse" checked>
-                            允许重复使用背景图
+                        <label for="allow-reuse">
+                            <input type="checkbox" id="allow-reuse" checked aria-describedby="reuse-help">
+                            允许重复使用背景图片
                         </label>
+                        <small id="reuse-help">允许重复可提高匹配度，但可能降低视觉多样性</small>
                     </div>
                 </div>
             </section>
 
             <!-- 操作按钮 -->
-            <section class="action-section">
-                <button type="button" class="primary-btn" id="generate-btn" disabled>开始生成</button>
-                <button type="button" class="secondary-btn" id="reset-btn">重置</button>
+            <section class="action-section" aria-labelledby="action-heading">
+                <h3 id="action-heading" class="sr-only">操作控制</h3>
+                <button type="button" class="primary-btn" id="generate-btn" disabled aria-describedby="generate-help">开始生成马赛克</button>
+                <button type="button" class="secondary-btn" id="reset-btn" aria-label="重置所有设置和上传的图片">重置</button>
+                <small id="generate-help">请先上传背景图片库和目标图片</small>
             </section>
 
             <!-- 进度指示器 -->
-            <section class="progress-section" id="progress-section" style="display: none;">
+            <section class="progress-section" id="progress-section" style="display: none;" aria-labelledby="progress-heading">
+                <h3 id="progress-heading">生成进度</h3>
                 <div class="progress-container">
-                    <div class="progress-bar">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-fill" id="progress-fill"></div>
                     </div>
-                    <div class="progress-text" id="progress-text">准备中...</div>
+                    <div class="progress-text" id="progress-text" aria-live="polite">准备中...</div>
                 </div>
             </section>
 
             <!-- 结果展示区 -->
-            <section class="result-section" id="result-section" style="display: none;">
-                <h3>生成结果</h3>
+            <section class="result-section" id="result-section" style="display: none;" aria-labelledby="result-heading">
+                <h3 id="result-heading">马赛克生成结果</h3>
                 <div class="result-container">
                     <div class="canvas-container">
-                        <canvas id="result-canvas"></canvas>
+                        <canvas id="result-canvas" aria-label="生成的马赛克图片"></canvas>
                     </div>
                     <div class="result-controls">
-                        <button type="button" class="download-btn" id="download-png-btn">下载 PNG</button>
-                        <button type="button" class="download-btn" id="download-jpg-btn">下载 JPG</button>
+                        <button type="button" class="download-btn" id="download-png-btn" aria-label="下载PNG格式的马赛克图片">下载 PNG</button>
+                        <button type="button" class="download-btn" id="download-jpg-btn" aria-label="下载JPG格式的马赛克图片">下载 JPG</button>
                     </div>
+                    <p class="result-description">您的马赛克艺术作品已生成完成！可以右键保存或点击下载按钮获取高清图片。</p>
                 </div>
             </section>
         </main>
+
+        <!-- 页面底部信息 -->
+        <footer role="contentinfo">
+            <div class="footer-content">
+                <p>&copy; 2024 千图成像工具 - 专业的在线马赛克拼图生成器</p>
+                <p>免费使用 | 无需注册 | 支持多种格式 | 高质量输出</p>
+                <nav class="footer-nav" aria-label="页脚导航">
+                    <a href="#" rel="noopener">使用教程</a>
+                    <a href="#" rel="noopener">常见问题</a>
+                    <a href="#" rel="noopener">联系我们</a>
+                    <a href="#" rel="noopener">隐私政策</a>
+                </nav>
+            </div>
+        </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>

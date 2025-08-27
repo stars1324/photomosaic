@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Allow specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
