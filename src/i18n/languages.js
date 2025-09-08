@@ -289,38 +289,77 @@ const languages = {
     }
 };
 
-// 다국어 관리 클래스
+// 多国语言管理类
 class I18n {
     constructor() {
-        this.currentLanguage = this.getStoredLanguage() || 'zh';
+        this.currentLanguage = this.getLanguageFromURL() || this.getStoredLanguage() || 'zh';
         this.translations = languages;
     }
 
-    // 저장된 언어 설정 가져오기
-    getStoredLanguage() {
-        return localStorage.getItem('photomosaic_language');
+    // 从URL获取语言参数
+    getLanguageFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get('lang');
+
+        // 检查是否是支持的语言
+        if (langParam && this.translations[langParam]) {
+            return langParam;
+        }
+
+        return null;
     }
 
-    // 언어 설정 저장
+    // 更新URL语言参数
+    updateURL(language) {
+        const url = new URL(window.location);
+        url.searchParams.set('lang', language);
+
+        // 更新浏览器历史记录，但不刷新页面
+        window.history.pushState({ language }, '', url);
+    }
+
+    // 生成语言链接
+    getLanguageLinks() {
+        return Object.keys(this.translations).map(code => {
+            const url = new URL(window.location);
+            url.searchParams.set('lang', code);
+
+            return {
+                code,
+                name: this.translations[code].name,
+                flag: this.translations[code].flag,
+                url: url.toString(),
+                active: code === this.currentLanguage
+            };
+        });
+    }
+
+    // 存储语言设置
     setStoredLanguage(language) {
         localStorage.setItem('photomosaic_language', language);
     }
 
-    // 현재 언어 가져오기
+    // 获取存储的语言设置
+    getStoredLanguage() {
+        return localStorage.getItem('photomosaic_language');
+    }
+
+    // 获取当前语言
     getCurrentLanguage() {
         return this.currentLanguage;
     }
 
-    // 언어 설정
+    // 设置语言
     setLanguage(language) {
         if (this.translations[language]) {
             this.currentLanguage = language;
             this.setStoredLanguage(language);
+            this.updateURL(language);
             this.updatePage();
         }
     }
 
-    // 번역 텍스트 가져오기
+    // 翻译函数
     t(key, params = {}) {
         const keys = key.split('.');
         let value = this.translations[this.currentLanguage]?.data;
@@ -330,7 +369,6 @@ class I18n {
         }
 
         if (typeof value === 'string' && Object.keys(params).length > 0) {
-            // 매개변수 치환
             return value.replace(/\{(\w+)\}/g, (match, param) => {
                 return params[param] !== undefined ? params[param] : match;
             });
@@ -339,7 +377,7 @@ class I18n {
         return value || key;
     }
 
-    // 사용 가능한 언어 목록
+    // 获取可用语言列表
     getAvailableLanguages() {
         return Object.keys(this.translations).map(code => ({
             code,
@@ -348,24 +386,24 @@ class I18n {
         }));
     }
 
-    // 페이지 업데이트
+    // 更新页面内容
     updatePage() {
-        // 문서 제목 및 메타 태그 업데이트
+        // 更新文档标题及元标签
         document.title = this.t('title');
         document.querySelector('meta[name="description"]').content = this.t('description');
         document.querySelector('meta[name="keywords"]').content = this.t('keywords');
         document.querySelector('html').lang = this.currentLanguage;
 
-        // Open Graph 메타 태그 업데이트
+        // 更新Open Graph元标签
         document.querySelector('meta[property="og:title"]').content = this.t('pageTitle');
         document.querySelector('meta[property="og:description"]').content = this.t('description');
         document.querySelector('meta[property="og:site_name"]').content = this.t('pageTitle');
 
-        // Twitter 메타 태그 업데이트
+        // 更新Twitter元标签
         document.querySelector('meta[name="twitter:title"]').content = this.t('pageTitle');
         document.querySelector('meta[name="twitter:description"]').content = this.t('description');
 
-        // JSON-LD 구조화 데이터 업데이트
+        // 更新JSON-LD结构化数据
         const jsonLdScript = document.querySelector('script[type="application/ld+json"]');
         if (jsonLdScript) {
             const jsonLd = JSON.parse(jsonLdScript.textContent);
@@ -374,25 +412,25 @@ class I18n {
             jsonLdScript.textContent = JSON.stringify(jsonLd, null, 4);
         }
 
-        // 페이지 콘텐츠 업데이트
+        // 更新页面内容
         this.updatePageContent();
     }
 
-    // 페이지 콘텐츠 업데이트
+    // 更新页面内容
     updatePageContent() {
-        // 헤더
+        // 头部内容
         const h1 = document.querySelector('header h1');
         if (h1) h1.textContent = this.t('pageTitle');
 
         const subtitle = document.querySelector('header p');
         if (subtitle) subtitle.textContent = this.t('pageSubtitle');
 
-        // 사용 방법
+        // 使用说明
         const instructionsTitle = document.querySelector('section h2');
-        if (instructionsTitle && instructionsTitle.textContent.includes('使用说明') ||
+        if (instructionsTitle && (instructionsTitle.textContent.includes('使用说明') ||
             instructionsTitle.textContent.includes('How to Use') ||
             instructionsTitle.textContent.includes('使用方法') ||
-            instructionsTitle.textContent.includes('사용 방법')) {
+            instructionsTitle.textContent.includes('사용 방법'))) {
             instructionsTitle.textContent = this.t('instructionsTitle');
         }
 
@@ -404,7 +442,7 @@ class I18n {
             ).join('');
         }
 
-        // 업로드 영역
+        // 上传区域
         this.updateElement('h3', '背景图片库上传', 'bgUploadTitle');
         this.updateElement('[id="bg-drop-zone"] p', null, 'bgUploadText');
         this.updateElement('[id="bg-upload-btn"]', null, 'bgUploadBtn');
@@ -417,7 +455,7 @@ class I18n {
         this.updateElement('[id="target-upload-help"]', null, 'targetUploadHelp');
         this.updateElement('[id="remove-target-btn"]', null, 'targetRemoveBtn');
 
-        // 설정 영역
+        // 配置区域
         this.updateElement('[id="config-heading"]', null, 'configTitle');
         this.updateElement('label[for="grid-size"]', null, 'gridSizeLabel');
         this.updateElement('[id="grid-size-help"]', null, 'gridSizeHelp');
@@ -426,7 +464,7 @@ class I18n {
         this.updateElement('label[for="allow-reuse"]', null, 'allowReuseLabel');
         this.updateElement('[id="reuse-help"]', null, 'allowReuseHelp');
 
-        // 품질 옵션
+        // 品质选项
         const qualitySelect = document.querySelector('#output-quality');
         if (qualitySelect) {
             const options = qualitySelect.querySelectorAll('option');
@@ -435,19 +473,19 @@ class I18n {
             if (options[2]) options[2].textContent = this.t('qualityUltra');
         }
 
-        // 버튼
+        // 操作按钮
         this.updateElement('[id="generate-btn"]', null, 'generateBtn');
         this.updateElement('[id="reset-btn"]', null, 'resetBtn');
         this.updateElement('[id="generate-help"]', null, 'generateHelp');
 
-        // 진행상황 및 결과
+        // 进度和结果
         this.updateElement('[id="progress-heading"]', null, 'progressTitle');
         this.updateElement('[id="result-heading"]', null, 'resultTitle');
         this.updateElement('[id="download-png-btn"]', null, 'downloadPngBtn');
         this.updateElement('[id="download-jpg-btn"]', null, 'downloadJpgBtn');
         this.updateElement('.result-description', null, 'resultDescription');
 
-        // 푸터
+        // 页脚
         const footerP = document.querySelectorAll('footer p');
         if (footerP[0]) footerP[0].textContent = this.t('footerCopyright');
         if (footerP[1]) footerP[1].textContent = this.t('footerFeatures');
@@ -460,11 +498,11 @@ class I18n {
             }
         });
 
-        // 업로드 카운트 업데이트
+        // 更新上传计数
         this.updateBgCount();
     }
 
-    // 요소 업데이트 헬퍼
+    // 更新元素内容的辅助函数
     updateElement(selector, fallbackText, translationKey) {
         const element = document.querySelector(selector);
         if (element && (fallbackText === null || element.textContent.includes(fallbackText))) {
@@ -472,7 +510,7 @@ class I18n {
         }
     }
 
-    // 배경 이미지 카운트 업데이트
+    // 更新背景图片计数
     updateBgCount() {
         const bgCountElement = document.querySelector('#bg-count');
         if (bgCountElement && window.backgroundImages) {
@@ -482,7 +520,7 @@ class I18n {
     }
 }
 
-// 전역 i18n 인스턴스
+// 全局i18n实例
 window.i18n = new I18n();
 
 export default window.i18n;

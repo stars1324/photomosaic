@@ -565,31 +565,89 @@ main {
     background: #2c5282;
 }
 
+/* 语言链接样式 */
+.language-links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 16px;
+    justify-content: center;
+}
+
+.language-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(8px);
+}
+
+.language-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.language-link.active {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #374151;
+    font-weight: 600;
+}
+
+.language-link.active:hover {
+    background: rgba(255, 255, 255, 1);
+    color: #2d3748;
+}
+
+.language-link .language-flag {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.language-link .language-name {
+    white-space: nowrap;
+}
+
+/* 在桌面设备上将语言链接放在右上角 */
+@media (min-width: 769px) {
+    .language-links {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 0;
+        justify-content: flex-end;
+    }
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
     }
     
-    .language-switcher {
-        margin-left: 0;
-        margin-top: 16px;
-        align-self: center;
+    .language-links {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 20px;
     }
 
-    .language-current {
+    .language-link {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .language-link .language-flag {
         font-size: 13px;
-        padding: 6px 10px;
-    }
-
-    .language-name {
-        min-width: 50px;
-    }
-
-    .language-dropdown {
-        right: 0;
-        left: 0;
-        min-width: auto;
     }
 
     .upload-container {
