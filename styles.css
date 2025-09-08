@@ -183,20 +183,101 @@ header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    order: 1;
 }
 
 header p {
     font-size: 1.1rem;
     opacity: 0.9;
     margin-bottom: 16px;
+    order: 2;
 }
 
-/* 在桌面设备上将语言切换器放在右上角 */
+/* 语言链接样式 */
+.language-links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    order: 3;
+    flex-wrap: wrap;
+}
+
+.language-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    min-width: 90px;
+    justify-content: center;
+}
+
+.language-link:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.language-link.active {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 1);
+    color: #374151;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.language-link.active:hover {
+    background: rgba(255, 255, 255, 1);
+    color: #2d3748;
+    transform: translateY(-2px);
+}
+
+.language-link .language-flag {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.language-link .language-name {
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+/* 在桌面设备上调整语言链接布局 */
 @media (min-width: 769px) {
-    header .language-switcher {
+    header {
+        padding-top: 60px;
+        position: relative;
+    }
+
+    .language-links {
         position: absolute;
         top: 0;
         right: 0;
+        margin-top: 0;
+        justify-content: flex-end;
+        order: 0;
+    }
+
+    .language-link {
+        min-width: 80px;
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .language-link .language-name {
+        font-size: 12px;
     }
 }
 
@@ -570,62 +651,86 @@ main {
     display: flex;
     gap: 12px;
     align-items: center;
-    margin-top: 16px;
     justify-content: center;
+    margin-top: 20px;
+    order: 3;
+    flex-wrap: wrap;
 }
 
 .language-link {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
     color: white;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    min-width: 90px;
+    justify-content: center;
 }
 
 .language-link:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    color: white;
 }
 
 .language-link.active {
     background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 1);
     color: #374151;
     font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .language-link.active:hover {
     background: rgba(255, 255, 255, 1);
     color: #2d3748;
+    transform: translateY(-2px);
 }
 
 .language-link .language-flag {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1;
 }
 
 .language-link .language-name {
     white-space: nowrap;
+    font-size: 13px;
 }
 
-/* 在桌面设备上将语言链接放在右上角 */
+/* 在桌面设备上调整语言链接布局 */
 @media (min-width: 769px) {
+    header {
+        padding-top: 60px;
+        position: relative;
+    }
+
     .language-links {
         position: absolute;
         top: 0;
         right: 0;
         margin-top: 0;
         justify-content: flex-end;
+        order: 0;
+    }
+
+    .language-link {
+        min-width: 80px;
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    .language-link .language-name {
+        font-size: 12px;
     }
 }
 
@@ -635,19 +740,30 @@ main {
         padding: 15px;
     }
     
+    header {
+        padding-top: 20px;
+    }
+
     .language-links {
+        position: static;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
         margin-top: 20px;
+        justify-content: center;
     }
 
     .language-link {
         font-size: 12px;
-        padding: 5px 10px;
+        padding: 6px 12px;
+        min-width: 75px;
     }
 
     .language-link .language-flag {
-        font-size: 13px;
+        font-size: 14px;
+    }
+
+    .language-link .language-name {
+        font-size: 11px;
     }
 
     .upload-container {

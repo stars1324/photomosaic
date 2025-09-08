@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO优化 - TDK -->
+    <title>Photo Mosaic Tool - Online Mosaic Generator | Free Photo Mosaic Creator</title>
+    <meta name="description" content="Professional online photo mosaic tool. Upload multiple background images to create artistic mosaic effects. Free to use, no installation required, high-quality output for personal and commercial design.">
+    <meta name="keywords" content="photo mosaic,mosaic generator,photo collage,image mosaic,online design tool,artistic effects,free tool,image processing">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Photo Mosaic Tool - Online Mosaic Generator">
+    <meta property="og:description" content="Professional online photo mosaic tool. Upload multiple background images to create artistic mosaic effects. Free to use, no installation required.">
+    <meta property="og:image" content="/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com/en.html">
+    <meta property="og:site_name" content="Photo Mosaic Tool">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Photo Mosaic Tool - Online Mosaic Generator">
+    <meta name="twitter:description" content="Professional online photo mosaic tool. Upload multiple background images to create artistic mosaic effects.">
+    <meta name="twitter:image" content="/twitter-image.jpg">
+
+    <!-- 其他SEO meta标签 -->
+    <meta name="author" content="Photo Mosaic Tool">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="en">
+    <meta name="revisit-after" content="7 days">
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- 结构化数据 - JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Photo Mosaic Tool",
+        "description": "Professional online photo mosaic tool. Upload multiple background images to create artistic mosaic effects",
+        "url": "https://yourdomain.com/en.html",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Online mosaic generation",
+            "Multiple image format support",
+            "High quality output",
+            "Free to use",
+            "No registration required"
+        ]
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Language alternate links -->
+    <link rel="alternate" hreflang="zh" href="index.html">
+    <link rel="alternate" hreflang="en" href="en.html">
+    <link rel="alternate" hreflang="ja" href="jp.html">
+    <link rel="alternate" hreflang="ko" href="kr.html">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Photo Mosaic Tool</h1>
+            <p>Upload target image and background image library to create artistic mosaic effects</p>
+
+            <!-- Language Links -->
+            <div class="language-links">
+                <a href="index.html" class="language-link" title="Switch to Chinese">
+                    <span class="language-flag">🇨🇳</span>
+                    <span class="language-name">中文</span>
+                </a>
+                <a href="en.html" class="language-link active" title="Switch to English">
+                    <span class="language-flag">🇺🇸</span>
+                    <span class="language-name">English</span>
+                </a>
+                <a href="jp.html" class="language-link" title="Switch to Japanese">
+                    <span class="language-flag">🇯🇵</span>
+                    <span class="language-name">日本語</span>
+                </a>
+                <a href="kr.html" class="language-link" title="Switch to Korean">
+                    <span class="language-flag">🇰🇷</span>
+                    <span class="language-name">한국어</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Simple instructions -->
+        <section style="background:#f8f9fa;border-radius:8px;padding:16px 20px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <h2 style="font-size:1.2rem;color:#333;margin-bottom:10px;">How to Use</h2>
+            <ol style="color:#555;font-size:1rem;line-height:1.8;padding-left:20px;">
+                <li>Upload multiple background images or ZIP files to the "Background Library" section.</li>
+                <li>Upload one target image to the "Target Image" section.</li>
+                <li>Adjust grid precision, output quality, and background image reuse settings.</li>
+                <li>Click "Generate Mosaic" button and wait for completion.</li>
+                <li>Preview the result below and download in PNG/JPG format.</li>
+            </ol>
+        </section>
+
+        <main role="main" id="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section" aria-labelledby="upload-heading">
+                <h2 id="upload-heading" class="sr-only">Image Upload Area</h2>
+                <div class="upload-container">
+                    <!-- Background Images Upload -->
+                    <article class="upload-area" id="bg-upload-area">
+                        <h3>Background Image Library</h3>
+                        <div class="drop-zone" id="bg-drop-zone" role="button" tabindex="0" aria-label="Drag or click to upload background images">
+                            <div class="drop-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                                </svg>
+                                <p>Drag multiple images or ZIP files here, supports JPG, PNG, WebP formats</p>
+                                <button type="button" class="upload-btn" id="bg-upload-btn" aria-describedby="bg-upload-help">Select Files</button>
+                                <input type="file" id="bg-file-input" multiple accept="image/*,.zip" style="display: none;" aria-label="Select background image files">
+                            </div>
+                        </div>
+                        <div class="upload-info">
+                            <span id="bg-count" aria-live="polite">Uploaded: 0 images</span>
+                            <button type="button" class="clear-btn" id="clear-bg-btn" aria-label="Clear all background images">Clear Library</button>
+                        </div>
+                        <small id="bg-upload-help">Recommend uploading 50-200 different high-quality images for best mosaic effects</small>
+                    </article>
+
+                    <!-- Target Image Upload -->
+                    <article class="upload-area" id="target-upload-area">
+                        <h3>Target Image Upload</h3>
+                        <div class="drop-zone" id="target-drop-zone" role="button" tabindex="0" aria-label="Drag or click to upload target image">
+                            <div class="drop-content" id="target-drop-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z" />
+                                </svg>
+                                <p>Drag target image here to convert into mosaic artwork</p>
+                                <button type="button" class="upload-btn" id="target-upload-btn" aria-describedby="target-upload-help">Select Image</button>
+                                <input type="file" id="target-file-input" accept="image/*" style="display: none;" aria-label="Select target image file">
+                            </div>
+                            <div class="target-preview" id="target-preview" style="display: none;">
+                                <img id="target-img" alt="Target image preview" loading="lazy">
+                                <button type="button" class="remove-btn" id="remove-target-btn" aria-label="Remove target image">Remove</button>
+                            </div>
+                        </div>
+                        <small id="target-upload-help">Supports JPG, PNG, WebP formats. High-resolution images recommended</small>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Configuration Section -->
+            <section class="config-section" aria-labelledby="config-heading">
+                <h3 id="config-heading">Mosaic Generation Parameters</h3>
+                <div class="config-container">
+                    <div class="config-item">
+                        <label for="grid-size">Grid Precision (Grid Count):</label>
+                        <div class="slider-container">
+                            <input type="range" id="grid-size" min="20" max="200" value="50" step="1" aria-describedby="grid-size-help">
+                            <span id="grid-value" aria-live="polite">50</span>
+                        </div>
+                        <small id="grid-size-help">Higher values create more detailed mosaics but take longer to generate. Recommended: 50-100</small>
+                    </div>
+                    <div class="config-item">
+                        <label for="output-quality">Output Quality:</label>
+                        <select id="output-quality" aria-describedby="quality-help">
+                            <option value="standard">Standard Quality (suitable for web preview and social sharing)</option>
+                            <option value="high" selected>High Quality (suitable for printing and professional use)</option>
+                            <option value="ultra">Ultra Quality (suitable for large format printing)</option>
+                        </select>
+                        <small id="quality-help">Higher quality produces larger resolution images and file sizes</small>
+                    </div>
+                    <div class="config-item">
+                        <label for="allow-reuse">
+                            <input type="checkbox" id="allow-reuse" checked aria-describedby="reuse-help">
+                            Allow background image reuse
+                        </label>
+                        <small id="reuse-help">Allowing reuse improves matching accuracy but may reduce visual diversity</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Section -->
+            <section class="action-section" aria-labelledby="action-heading">
+                <h3 id="action-heading" class="sr-only">Action Controls</h3>
+                <button type="button" class="primary-btn" id="generate-btn" disabled aria-describedby="generate-help">Generate Mosaic</button>
+                <button type="button" class="secondary-btn" id="reset-btn" aria-label="Reset all settings and uploaded images">Reset</button>
+                <small id="generate-help">Please upload background library and target image first</small>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section" id="progress-section" style="display: none;" aria-labelledby="progress-heading">
+                <h3 id="progress-heading">Generation Progress</h3>
+                <div class="progress-container">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text" aria-live="polite">Preparing...</div>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section class="result-section" id="result-section" style="display: none;" aria-labelledby="result-heading">
+                <h3 id="result-heading">Mosaic Generation Result</h3>
+                <div class="result-container">
+                    <div class="canvas-container">
+                        <canvas id="result-canvas" aria-label="Generated mosaic image"></canvas>
+                    </div>
+                    <div class="result-controls">
+                        <button type="button" class="download-btn" id="download-png-btn" aria-label="Download PNG format mosaic image">Download PNG</button>
+                        <button type="button" class="download-btn" id="download-jpg-btn" aria-label="Download JPG format mosaic image">Download JPG</button>
+                    </div>
+                    <p class="result-description">Your mosaic artwork is complete! Right-click to save or use download buttons for high-quality images.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer role="contentinfo">
+            <div class="footer-content">
+                <p>&copy; 2025 Photo Mosaic Tool - Professional Online Mosaic Generator</p>
+                <p>Free to Use • No Registration • Multiple Formats • High Quality Output</p>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="#" rel="noopener">Tutorial</a>
+                    <a href="#" rel="noopener">FAQ</a>
+                    <a href="#" rel="noopener">Contact</a>
+                    <a href="#" rel="noopener">Privacy Policy</a>
+                </nav>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="photomosaic.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
