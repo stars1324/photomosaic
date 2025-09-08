@@ -2,9 +2,35 @@
 class PhotoMosaicApp {
     constructor() {
         this.processor = new PhotoMosaicProcessor();
+        this.backgroundImages = []; // 添加背景图片数组
         this.initializeElements();
         this.setupEventListeners();
         this.setupProgressCallback();
+        this.setupI18nSupport(); // 添加多语言支持
+    }
+
+    // 设置多语言支持
+    setupI18nSupport() {
+        // 监听语言变化事件
+        document.addEventListener('languageChanged', (e) => {
+            this.updateDynamicContent();
+        });
+
+        // 将背景图片数组暴露到全局，供i18n系统使用
+        window.backgroundImages = this.backgroundImages;
+    }
+
+    // 更新动态内容（如上传计数等）
+    updateDynamicContent() {
+        if (window.i18n) {
+            // 更新背景图片计数
+            this.updateBackgroundCount();
+
+            // 更新进度文本（如果正在生成）
+            if (this.progressSection.style.display !== 'none') {
+                this.updateProgressText();
+            }
+        }
     }
 
     // 初始化DOM元素
@@ -188,7 +214,26 @@ class PhotoMosaicApp {
     // 更新背景图片数量显示
     updateBackgroundCount() {
         const count = this.processor.getBackgroundImageCount();
-        this.bgCount.textContent = `已上传: ${count} 张图片`;
+        this.backgroundImages.length = count; // 同步数组长度
+
+        if (window.i18n) {
+            this.bgCount.textContent = window.i18n.t('bgUploadCount', { count });
+        } else {
+            this.bgCount.textContent = `已上传: ${count} 张图片`;
+        }
+    }
+
+    // 更新进度文本（支持多语言）
+    updateProgressText() {
+        if (window.i18n && this.progressText.textContent) {
+            // 如果当前显示的是"准备中..."，更新为对应语言
+            if (this.progressText.textContent.includes('准备') ||
+                this.progressText.textContent.includes('Preparing') ||
+                this.progressText.textContent.includes('準備') ||
+                this.progressText.textContent.includes('준비')) {
+                this.progressText.textContent = window.i18n.t('progressPreparing');
+            }
+        }
     }
 
     // 检查是否可以生成

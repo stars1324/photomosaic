@@ -19,6 +19,119 @@ body {
     padding: 20px;
 }
 
+/* 语言切换器样式 */
+.language-switcher {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    z-index: 1000;
+}
+
+.language-current {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.language-current:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: #667eea;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+    transform: translateY(-1px);
+}
+
+.language-current:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.language-flag {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.language-name {
+    min-width: 60px;
+    text-align: left;
+}
+
+.language-arrow {
+    fill: #6b7280;
+    transition: transform 0.2s ease;
+}
+
+.language-dropdown.show .language-arrow {
+    transform: rotate(180deg);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 140px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.language-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #374151;
+    transition: background-color 0.2s ease;
+    text-align: left;
+}
+
+.language-option:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.language-option.active {
+    background: rgba(102, 126, 234, 0.15);
+    color: #667eea;
+    font-weight: 500;
+}
+
+.language-option.active::after {
+    content: '✓';
+    margin-left: auto;
+    color: #667eea;
+    font-weight: 600;
+}
+
 /* SEO和可访问性相关样式 */
 .sr-only {
     position: absolute;
@@ -57,6 +170,10 @@ body {
 
 /* 头部样式 */
 header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
     text-align: center;
     margin-bottom: 40px;
     color: white;
@@ -71,6 +188,16 @@ header h1 {
 header p {
     font-size: 1.1rem;
     opacity: 0.9;
+    margin-bottom: 16px;
+}
+
+/* 在桌面设备上将语言切换器放在右上角 */
+@media (min-width: 769px) {
+    header .language-switcher {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 }
 
 /* 主内容区 */
@@ -444,6 +571,27 @@ main {
         padding: 15px;
     }
     
+    .language-switcher {
+        margin-left: 0;
+        margin-top: 16px;
+        align-self: center;
+    }
+
+    .language-current {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .language-name {
+        min-width: 50px;
+    }
+
+    .language-dropdown {
+        right: 0;
+        left: 0;
+        min-width: auto;
+    }
+
     .upload-container {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -472,6 +620,16 @@ main {
     
     .download-btn {
         width: 100%;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-nav a {
+        display: block;
+        padding: 10px;
     }
 }
 
